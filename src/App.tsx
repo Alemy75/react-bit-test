@@ -11,29 +11,25 @@ function App() {
 
     const [onMenuItems, setOnMenuItems] = useState([1, 2, 3]);
 
-    const [onBoardItems, setOnBoardItems] = useState([]);
+    const [onBoardItems, setOnBoardItems] = useState<[]>([]);
 
-	const dragStartHandler = (id: null | number) => {
+    const dragStartHandler = (id: number) => {
         setDraggedItem(id);
     };
 
     const dragOverHandler = (event: DragEvent<HTMLDivElement>) => {
-		event.preventDefault();
+        event.preventDefault();
     };
 
     const dropHandler = (event: DragEvent<HTMLDivElement>) => {
-		event.preventDefault();
-        draggedItem !== null && onMenuItems.includes(draggedItem)
-            ? () => {
-                  onMenuItems.filter((item) => item !== draggedItem);
-              }
-            : setOnMenuItems(
-                  onBoardItems.filter((item) => item !== draggedItem)
-              );
+        event.preventDefault();
+        event.preventDefault();
+        setOnMenuItems(onMenuItems.filter((item) => item !== draggedItem));
+        setOnBoardItems([...onBoardItems, draggedItem]);
+        setDraggedItem(null);
     };
 
-	const dragEndHandler = (event: DragEvent<HTMLDivElement>) => {
-        event.preventDefault();
+    const dragEndHandler = () => {
         setDraggedItem(null);
     };
 
@@ -62,26 +58,31 @@ function App() {
                         <div className="absolute right-5 top-16 min-h-[80vh] w-[400px] bg-white z-50 shadow-lg rounded-xl">
                             <div
                                 className="p-5"
-                                onDragOver={(event) => dragOverHandler(event)}
-                                onDrop={(event) => dropHandler(event)}
+                                onDragOver={dragOverHandler}
+                                onDrop={dropHandler}
                             >
                                 {onMenuItems.map((id) => (
-                                    <DragItem
-                                        id={id}
-                                        dragStartHandler={dragStartHandler}
-                                        dragEndHandler={dragEndHandler}
-                                    />
+                                    <div
+                                        draggable
+                                        onDragStart={() => dragStartHandler(id)}
+                                        onDragEnd={dragEndHandler}
+                                        className="cursor-grab mb-5 user-select-none"
+                                    >
+                                        <DragItem id={id} />
+                                    </div>
                                 ))}
                             </div>
                         </div>
                     )}
-                    <div className="widget-grid h-[100%] p-[20px]">
+                    <div
+                        className="widget-grid h-[100%] p-[20px]"
+                        onDragOver={dragOverHandler}
+                        onDrop={dropHandler}
+                    >
                         {onBoardItems.map((id) => (
-                            <DragItem
-                                id={id}
-                                dragStartHandler={dragStartHandler}
-                                dragEndHandler={dragEndHandler}
-                            />
+                            <div>
+                                <DragItem id={id} />
+                            </div>
                         ))}
                     </div>
                 </div>
