@@ -16,6 +16,7 @@ $ npm run dev
 
 # build
 $ npm run build
+```
 
 ## Инструменты реализации
 React, RTK Query, Chart JS
