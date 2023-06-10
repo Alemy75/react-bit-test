@@ -13,6 +13,10 @@ body {
     font-size: 20px;
     font-weight: 400;
     font-family: 'Roboto', sans-serif;
+    background-color: rgb(219 234 254);
+    @media (max-width: 1000px) {
+        font-size: 16px;
+    }
 }
 
 h1 {
@@ -28,19 +32,75 @@ h1 {
     border-left: 2px solid #005fb8;
 }
 
-.fz-100px {
-    font-size: 100px;
-    line-height: 100px;
+.fz-max {
+    font-size: 5rem;
+    line-height: 5rem;
     font-weight: 300;
 }
 
 .circle {
     border-radius: 50%;
-    background: linear-gradient(0, #005fb8 25%, white 25%);
+    width: 380px;
+    max-width: 100%;
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
     -ms-border-radius: 50%;
     -o-border-radius: 50%;
+    @media (max-width: 400px) {
+        width: 300px;
+    }
+}
+
+.card-size {
+    width: 600px;
+    max-width: 100%;
+    aspect-ratio: 1/0.65 ;
+    @media (max-width: 1560px) {
+        width: 400px;
+    }
+    @media (max-width: 1160px) {
+        flex-direction: column;
+    }
+    @media (max-width: 600px) {
+        width: 400px;
+    }
+    @media (max-width: 400px) {
+        width: 300px;
+    }
+}
+
+.content {
+    display: flex;
+    @media (max-width: 1160px) {
+        flex-direction: column;
+        
+    }
+    &__left {
+        height: 100vh;
+        width: 20%;
+        min-height: 100vh;
+        @media (max-width: 1160px) {
+            width: 100%;
+            height: 110px;
+            min-height: 0;
+        }
+    }
+    &__right {
+        height: 100vh;
+        width: 80%;
+        min-height: 100vh;
+        @media (max-width: 1160px) {
+            width: 100%;
+        }
+    }
+}
+
+.circle_blue {
+    background: linear-gradient(0, #005fb8 25%, white 25%);
+}
+
+.circle_red {
+    background: linear-gradient(0, #c25d55 25%, white 25%);
 }
 
 .widget-grid {
@@ -50,6 +110,11 @@ h1 {
     grid-column-gap: 20px;
     grid-row-gap: 20px;
     place-items: center;
+    @media (max-width: 1200px) {
+        display: flex;
+        flex-direction: column;
+        margin-top: 100px
+    }
 }
 
 .settings-button {
@@ -97,7 +162,7 @@ table.iksweb td,
 table.iksweb th {
     white-space: pre-wrap;
     padding: 10px 5px;
-	height: 60px;
+    height: 60px;
     line-height: 13px;
     vertical-align: middle;
     border: 0px solid #ffffff;
@@ -113,7 +178,6 @@ table.iksweb tr:hover td {
 .scroll-body {
     overflow-y: scroll;
 }
-
 
 .scroll-body::-webkit-scrollbar {
     width: 0px;

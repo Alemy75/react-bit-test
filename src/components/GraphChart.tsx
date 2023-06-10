@@ -10,6 +10,7 @@ import {
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 import { useGetGraphValueQuery } from '../store/widget.api';
+import { options } from './GraphOptions';
 
 ChartJS.register(
     CategoryScale,
@@ -22,30 +23,11 @@ ChartJS.register(
 );
 
 const GraphChart = () => {
-    const options = {
-        responsive: true,
-        plugins: {
-            legend: {
-                display: false,
-            },
-            tooltip: {
-                titleFont: {
-                    family: 'Roboto', // Имя выбранного шрифта
-                    size: 20, // Размер шрифта
-                },
-                bodyFont: {
-                    family: 'Roboto', // Имя выбранного шрифта
-                    size: 12, // Размер шрифта
-                },
-            },
-        },
-    };
+        const { data: chartData, isSuccess: success } = useGetGraphValueQuery();
 
-    const { data: chartData, isSuccess: succes } = useGetGraphValueQuery();
+    const values = success ? chartData.map((item) => item.currentValue) : [];
 
-    const values = succes ? chartData.map((item) => item.currentValue) : [];
-
-    const labels = succes
+    const labels = success
         ? chartData.map((item) => item.timestep.split(' ')[1])
         : [];
 

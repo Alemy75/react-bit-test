@@ -6,7 +6,7 @@ const TableWidget = () => {
     console.log(data);
 
     return (
-        <div className="aspect-square cursor-pointer w-[600px] max-h-[400px] max-w-[100%] max-h-[100%] bg-white shadow-lg rounded-xl scroll-body relative ">
+        <div className="aspect-square cursor-pointer card-size bg-white shadow-lg rounded-xl scroll-body relative ">
             <table className="iksweb">
                 <thead className=''>
                     <tr>
