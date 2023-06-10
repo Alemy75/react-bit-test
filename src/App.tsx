@@ -3,6 +3,8 @@ import LogoSvg from './assets/svg/LogoSvg';
 import PanelSvg from './assets/svg/PanelSvg';
 import SettingsSvg from './assets/svg/SettingsSvg';
 import DragItem from './components/DragItem';
+import Navbar from './components/Navbar';
+import Panel from './components/Panel';
 
 function App() {
     const [isMenuShown, setIsMenuShown] = useState(false);
@@ -42,21 +44,9 @@ function App() {
 
     return (
         <>
-            <nav className="h-[90px] border-b border-gray-100 z-20 bg-white">
-                <div className="flex h-[100%] items-center ml-[24px]">
-                    <LogoSvg />
-                    <h1 className="ml-[12px]">Энергия</h1>
-                </div>
-            </nav>
+            <Navbar />
             <div className="content">
-                <div className="content__left shadow-sm bg-white inline-block z-10">
-                    <div className="h-[45px] flex bg-blue-100 mt-[34px] items-center border-left-blue cursor-pointer">
-                        <div className="ml-[33px]">
-                            <PanelSvg />
-                        </div>
-                        <span className="font-blue ml-[21px]">Панель</span>
-                    </div>
-                </div>
+                <Panel />
                 <div className="content__right bg-blue-100 relative">
                     <SettingsSvg
                         onClick={() => setIsMenuShown((prev) => !prev)}

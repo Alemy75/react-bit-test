@@ -1,15 +1,29 @@
-import { useGetControlValueQuery, useGetGraphValueQuery } from '../store/widget.api';
+import { useEffect } from 'react';
+import { useGetControlValueQuery } from '../store/widget.api';
 
 const RoundWidget = () => {
-    const { data, isSuccess } = useGetControlValueQuery();
+    const { data, isSuccess, refetch } = useGetControlValueQuery();
 
-    console.log(data)
+    console.log(data);
 
     const roundColor =
         isSuccess && data.currentValue > 0 && data.currentValue < 4.5
             ? 'circle_red'
             : 'circle_blue';
-    
+
+    useEffect(() => {
+        const pollingInterval = 5000;
+        let timerId: number;
+
+        const pollData = () => {
+            refetch();
+
+            timerId = setTimeout(pollData, pollingInterval);
+        };
+
+        pollData();
+    }, []);
+
     return (
         <article
             className={`aspect-square bg-white rounded-[200px] relative circle ${roundColor} shadow-lg cursor-pointer`}
