@@ -1,10 +1,10 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useGetControlValueQuery } from '../store/widget.api';
 
 const RoundWidget = () => {
     const { data, isSuccess, refetch } = useGetControlValueQuery();
+    const timerRef = useRef<number | undefined>(undefined);
 
-    console.log(data);
 
     const roundColor =
         isSuccess && data.currentValue > 0 && data.currentValue < 4.5
@@ -13,12 +13,11 @@ const RoundWidget = () => {
 
     useEffect(() => {
         const pollingInterval = 5000;
-        let timerId: number;
 
         const pollData = () => {
             refetch();
 
-            timerId = setTimeout(pollData, pollingInterval);
+            timerRef.current = setTimeout(pollData, pollingInterval);
         };
 
         pollData();

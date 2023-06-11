@@ -187,3 +187,16 @@ table.iksweb tr:hover td {
 .scroll-body::-webkit-scrollbar-thumb {
     background-color: #d8ecff;
 }
+
+.popup-widgets {
+    right: 20px;
+    top: 60px;
+    height: 90vh;
+    width: 400px;
+    @media (max-width: 500px) {
+        width: 100%;
+        padding: 5%;
+        right: 0;
+        text-align: center;
+    }    
+}

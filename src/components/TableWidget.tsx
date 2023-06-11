@@ -1,29 +1,27 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useGetTableValueQuery } from '../store/widget.api';
 import { TableItem } from '../types/widget.types';
 
 const TableWidget = () => {
     const { data, isSuccess, refetch } = useGetTableValueQuery();
-    console.log(data);
+    const timerRef = useRef<number | undefined>(undefined);
 
     useEffect(() => {
         const pollingInterval = 60000;
-        let timerId: number;
 
         const pollData = () => {
             refetch();
 
-            timerId = setTimeout(pollData, pollingInterval);
+            timerRef.current = setTimeout(pollData, pollingInterval);
         };
 
         pollData();
     }, []);
 
-
     return (
         <div className="aspect-square cursor-pointer card-size bg-white shadow-lg rounded-xl scroll-body relative ">
             <table className="iksweb">
-                <thead className=''>
+                <thead className="">
                     <tr>
                         <th>Изменение</th>
                         <th>Наст. значение</th>

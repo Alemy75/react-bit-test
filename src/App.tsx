@@ -1,6 +1,4 @@
 import { DragEvent, useState } from 'react';
-import LogoSvg from './assets/svg/LogoSvg';
-import PanelSvg from './assets/svg/PanelSvg';
 import SettingsSvg from './assets/svg/SettingsSvg';
 import DragItem from './components/DragItem';
 import Navbar from './components/Navbar';
@@ -52,9 +50,9 @@ function App() {
                         onClick={() => setIsMenuShown((prev) => !prev)}
                     />
                     {isMenuShown && (
-                        <div className="absolute right-7 bottom-7 h-[90vh] w-[400px] bg-white z-50 shadow-lg rounded-xl overflow-y-scroll scroll-body">
+                        <div className="absolute popup-widgets bg-white z-50 shadow-lg rounded-xl scroll-body">
                             <div
-                                className="p-5 h-[90vh] w-[400px]"
+                                className="p-5 h-[90vh]"
                                 onDragOver={dragOverHandler}
                                 onDrop={dropHandler}
                             >

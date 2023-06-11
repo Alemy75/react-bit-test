@@ -11,7 +11,7 @@ import {
 import { Line } from 'react-chartjs-2';
 import { useGetGraphValueQuery } from '../store/widget.api';
 import { options } from './GraphOptions';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
 ChartJS.register(
     CategoryScale,
@@ -24,8 +24,9 @@ ChartJS.register(
 );
 
 const GraphChart = () => {
-        const { data: chartData, isSuccess: success, refetch } = useGetGraphValueQuery();
-
+    const { data: chartData, isSuccess: success, refetch } = useGetGraphValueQuery();
+    const timerRef = useRef<number | undefined>(undefined);
+    
     const values = success ? chartData.map((item) => item.currentValue) : [];
 
     const labels = success
@@ -47,12 +48,11 @@ const GraphChart = () => {
 
     useEffect(() => {
         const pollingInterval = 60000;
-        let timerId: number;
 
         const pollData = () => {
             refetch();
 
-            timerId = setTimeout(pollData, pollingInterval);
+            timerRef.current = setTimeout(pollData, pollingInterval);
         };
 
         pollData();

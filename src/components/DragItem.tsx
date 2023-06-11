@@ -1,4 +1,4 @@
-import React, { DragEvent } from 'react';
+import React from 'react';
 import ChartWidget from './ChartWidget';
 import TableWidget from './TableWidget';
 import RoundWidget from './RoundWidget';
